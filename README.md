@@ -28,29 +28,9 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`pumpkin hello [FILE]`](#pumpkin-hello-file)
 * [`pumpkin help [COMMAND]`](#pumpkin-help-command)
 * [`pumpkin init [FILE]`](#pumpkin-init-file)
 
-## `pumpkin hello [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ pumpkin hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ pumpkin hello
-  hello world from ./src/hello.ts!
-```
-
-_See code: [src/commands/hello.ts](https://github.com/LeopoldBriand-bot/PumpkinCLI/blob/v0.0.0/src/commands/hello.ts)_
 
 ## `pumpkin help [COMMAND]`
 
@@ -69,13 +49,13 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src/commands/help.ts)_
 
-## `pumpkin init [FILE]`
+## `pumpkin init [NAME]`
 
 describe the command here
 
 ```
 USAGE
-  $ pumpkin init [FILE]
+  $ pumpkin init [NAME]
 
 OPTIONS
   -f, --force

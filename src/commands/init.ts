@@ -2,6 +2,7 @@ import {Command} from '@oclif/command'
 import * as inquirer from 'inquirer'
 import fs = require('fs');
 import yaml = require('js-yaml');
+import * as builder from '../scripts/builder'
 
 export default class Init extends Command {
   static description = 'Init a new pumpkin project'
@@ -28,9 +29,9 @@ export default class Init extends Command {
     const {args, flags} = this.parse(Init)
 
     if(args.name) {
-      Init.configuration.name = args.name;
+      Init.configuration.name = args.name.toLowerCase();
     } else {
-      Init.configuration.name = 'pumpkinProject';
+      Init.configuration.name = 'pumpkin-project';
     }
     
 
@@ -83,7 +84,7 @@ export default class Init extends Command {
     const promptlibraries : any = await inquirer.prompt([
       {
         type: 'checkbox',
-        message: 'Choose databases you need',
+        message: 'Choose libraries you need',
         name: 'libraries',
         choices: ['UnderscoreJs', 'nodeMailer', 'GraphQL', 'Inversify', 'socketIO']
       }
@@ -102,13 +103,19 @@ export default class Init extends Command {
         type: 'checkbox',
         message: 'Choose options you need',
         name: 'options',
-        choices: ['Docker', 'Uglify']
+        choices: ['Docker']
       }
     ]);
     Init.configuration.options = promptOptions.options;
 
-    console.log(Init.configuration)
+    try {
+      fs.mkdirSync('./'+Init.configuration.name);
+      process.chdir('./'+Init.configuration.name);
+    } catch(e) {
+      console.error(e);
+    }
     let yamlStr = yaml.safeDump(Init.configuration);
     fs.writeFileSync('pumpkin.yaml', yamlStr, 'utf8');
+    builder.build(Init.configuration);
   }
 }
