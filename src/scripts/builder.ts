@@ -1,8 +1,8 @@
 import * as fs from 'fs'
 import * as yaml from 'js-yaml'
 import * as exec from 'child_process'
-import * as simplearchitecture from './architecture/simple'
-import * as initJs6app from './language/js6'
+import * as simplearchitecture from './init-command/architecture/simple'
+import * as initJs6app from './init-command/language/js6'
 
 export function build(config: any) {
 
