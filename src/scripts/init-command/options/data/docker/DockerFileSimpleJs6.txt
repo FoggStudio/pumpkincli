@@ -1,0 +1,15 @@
+FROM node:10.20.1-alpine3.9
+
+RUN mkdir -p /srv/app/api 
+
+COPY package.json /srv/app/api
+COPY package-lock.json /srv/app/api
+COPY start.js /srv/app/api
+COPY server.js /srv/app/api
+COPY ./src /srv/app/api/API
+
+WORKDIR /srv/app/api 
+
+RUN npm install
+
+CMD ["npm", "start"]
