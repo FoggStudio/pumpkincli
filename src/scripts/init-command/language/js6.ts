@@ -1,11 +1,11 @@
 import * as fs from 'fs'
 import * as exec from 'child_process'
-import * as fetch from 'node-fetch'
 
 let startData = fs.readFileSync(require.resolve('./data/js6/start.txt'));
 let serverData = fs.readFileSync(require.resolve('./data/js6/server.txt'));
 
-export function initDependencies() {
+export function initDependencies(path: string) {
+    process.chdir(path);
     exec.exec('npm install cors --save', (err, stdout, stderr) => {
         if (err) { console.log(err); return; }
     });
@@ -26,8 +26,9 @@ export function initDependencies() {
     });
 }
 
-export function writeAppFile() {
+export function writeAppFile(path: string) {
 
+    process.chdir(path);
     process.chdir('./src');
 
     exec.exec('touch start.js', (err, stdout, stderr) => {

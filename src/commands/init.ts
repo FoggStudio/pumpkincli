@@ -12,6 +12,7 @@ export default class Init extends Command {
 
   static configuration = {
     name: '',
+    path: '',
     language: null,
     architecture: null,
     tests: {
@@ -111,6 +112,7 @@ export default class Init extends Command {
     try {
       fs.mkdirSync('./'+Init.configuration.name);
       process.chdir('./'+Init.configuration.name);
+      Init.configuration.path = process.cwd();
     } catch(e) {
       console.error(e);
     }

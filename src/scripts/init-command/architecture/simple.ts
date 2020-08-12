@@ -1,6 +1,7 @@
 import * as fs from 'fs'
  
-export function buildArchitecture () {
+export function buildArchitecture (path: string) {
+    process.chdir(path);
     if (!fs.existsSync('./src')){
         fs.mkdirSync('./src');
         fs.mkdirSync('./src/Controller');
