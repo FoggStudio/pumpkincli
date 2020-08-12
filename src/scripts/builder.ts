@@ -3,6 +3,8 @@ import * as yaml from 'js-yaml'
 import * as exec from 'child_process'
 import * as simplearchitecture from './init-command/architecture/simple'
 import * as initJs6app from './init-command/language/js6'
+import * as initDocker from './init-command/options/docker'
+import * as utils from './init-command/utils/dataBaseHelper'
 
 export function build(config: any) {
 
@@ -38,18 +40,33 @@ export function build(config: any) {
     // ********************************************************
 
     if (config.language === "Javascript ECMAScript 6") {
-        initJs6app.initDependencies();
+        initJs6app.initDependencies(config.path);
     }
 
-
+    // ********************************************************
+    // Create folders and files
+    // ********************************************************
 
     // Build Architecture
     if (config.architecture === "Simple") {
-        simplearchitecture.buildArchitecture();
+        simplearchitecture.buildArchitecture(config.path);
     }
 
     // Create app file with the good language
     if (config.language === "Javascript ECMAScript 6"){
-        initJs6app.writeAppFile();
+        initJs6app.writeAppFile(config.path);
     }
+
+    // Add dataBases connections
+    if (config.databases.length > 0) {
+        config.databases.forEach((element: string) => {
+            utils.addDtabaseConnection(element, config)
+        });
+    }
+
+    // Create dockerFile, docker-compose.yaml and .dockerignore
+    if (config.options.indexOf('Docker') > -1) {
+        initDocker.initDocker(config);
+    }
+
 }
