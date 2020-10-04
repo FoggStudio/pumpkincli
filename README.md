@@ -19,7 +19,7 @@ $ npm install -g pumpkin
 $ pumpkin COMMAND
 running command...
 $ pumpkin (-v|--version|version)
-pumpkin/0.0.0 linux-x64 node-v10.2.0
+pumpkin/0.1.0 linux-x64 node-v10.2.0
 $ pumpkin --help [COMMAND]
 USAGE
   $ pumpkin COMMAND
@@ -28,9 +28,29 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`pumpkin hello [FILE]`](#pumpkin-hello-file)
 * [`pumpkin help [COMMAND]`](#pumpkin-help-command)
-* [`pumpkin init [FILE]`](#pumpkin-init-file)
+* [`pumpkin init [NAME]`](#pumpkin-init-name)
 
+## `pumpkin hello [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ pumpkin hello [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+
+EXAMPLE
+  $ pumpkin hello
+  hello world from ./src/hello.ts!
+```
+
+_See code: [src/commands/hello.ts](https://github.com/LeopoldBriand-bot/PumpkinCLI/blob/v0.1.0/src/commands/hello.ts)_
 
 ## `pumpkin help [COMMAND]`
 
@@ -51,17 +71,12 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0
 
 ## `pumpkin init [NAME]`
 
-describe the command here
+Init a new pumpkin project
 
 ```
 USAGE
   $ pumpkin init [NAME]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
 ```
 
-_See code: [src/commands/init.ts](https://github.com/LeopoldBriand-bot/PumpkinCLI/blob/v0.0.0/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/LeopoldBriand-bot/PumpkinCLI/blob/v0.1.0/src/commands/init.ts)_
 <!-- commandsstop -->

@@ -1,12 +1,12 @@
 {
   "name": "pumpkin",
   "description": "A fully configurable CLI for express projects",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Leopold @LeopoldBriand-bot",
   "bin": {
     "pumpkin": "./bin/run"
   },
-  "bugs": "https://github.com/LeopoldBriand-bot/PumpkinCLI/issues",
+  "bugs": "https://github.com/FoggStudio/PumpkinCLI/issues",
   "dependencies": {
     "@oclif/command": "^1.6.1",
     "@oclif/config": "^1.15.1",
@@ -45,7 +45,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/LeopoldBriand-bot/PumpkinCLI",
+  "homepage": "https://github.com/FoggStudio/PumpkinCLI",
   "keywords": [
     "oclif"
   ],
@@ -58,7 +58,10 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "LeopoldBriand-bot/PumpkinCLI",
+  "repository": "FoggStudio/PumpkinCLI",
+  "publishConfig": { 
+    "registry": "https://npm.pkg.github.com/@FoggStudio" 
+  },
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
