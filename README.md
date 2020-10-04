@@ -50,7 +50,7 @@ EXAMPLE
   hello world from ./src/hello.ts!
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/LeopoldBriand-bot/PumpkinCLI/blob/v0.1.0/src/commands/hello.ts)_
+_See code: [src/commands/hello.ts](https://github.com/FoggStudio/PumpkinCLI/blob/v0.1.0/src/commands/hello.ts)_
 
 ## `pumpkin help [COMMAND]`
 
@@ -78,5 +78,5 @@ USAGE
   $ pumpkin init [NAME]
 ```
 
-_See code: [src/commands/init.ts](https://github.com/LeopoldBriand-bot/PumpkinCLI/blob/v0.1.0/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/FoggStudio/PumpkinCLI/blob/v0.1.0/src/commands/init.ts)_
 <!-- commandsstop -->
