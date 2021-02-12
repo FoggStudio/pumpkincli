@@ -1,0 +1,14 @@
+
+// ********************************************************
+// Connection to Mongo database
+// ********************************************************
+
+mongoose
+	.connect("mongodb://<%=address%>:27017/<%=databaseName%>?authSource=admin", { useNewUrlParser: true, useUnifiedTopology: true })
+	.then(() => {
+		console.log("Connected to database");
+	})
+    .catch(e => {
+        console.warn("Error during database connection");
+        console.log(e);
+    })

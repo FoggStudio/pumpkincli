@@ -1,0 +1,7 @@
+var routes = function(app) {
+
+<%=routes %>
+
+}
+
+module.exports = routes;

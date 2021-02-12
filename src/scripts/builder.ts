@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import * as exec from 'child_process'
+import * as initJs5app from './init-command/language/js5'
 import * as initJs6app from './init-command/language/js6'
 import * as initDocker from './init-command/options/docker'
 
@@ -23,6 +24,10 @@ export async function build(config: any) {
     // ********************************************************
 
     switch (config.language) {
+        case "Javascript ECMAScript 5":
+            await initJs5app.initDependencies(config);
+            await initJs5app.addScripts(config.path);
+            break;
         case "Javascript ECMAScript 6":
             await initJs6app.initDependencies(config);
             await initJs6app.addScripts(config.path);
@@ -52,6 +57,9 @@ export async function build(config: any) {
     // ********************************************************
 
     switch (config.language) {
+        case "Javascript ECMAScript 5":
+            initJs5app.writeAppFile(config);
+            break;
         case "Javascript ECMAScript 6":
             initJs6app.writeAppFile(config);
             break;

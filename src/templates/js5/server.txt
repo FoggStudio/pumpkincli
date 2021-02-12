@@ -1,13 +1,13 @@
 // importations
-import express from 'express';
-import bodyParser from 'body-parser';
-import routes from './Routes';
-import cors from 'cors'
+var express = require('express');
+var bodyParser = require('body-parser');
+var routes = require('./Routes');
+var cors = require('cors');
 <%=imports%>
 
 // build app
-const app = express();
-const port = process.env.port || 3000;
+var app = express();
+var port = process.env.port || 3000;
 
 <%=dataBaseConnection%>
 
