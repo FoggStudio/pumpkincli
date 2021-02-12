@@ -9,12 +9,8 @@ const mongoData = fs.readFileSync(require.resolve('../../../templates/js6/databa
 
 export function initDependencies(config: any) {
     process.chdir(config.path);
-    exec.execSync('npm install cors --save');
-    exec.execSync('npm install express --save');
-    exec.execSync('npm install @babel/core --save-dev');
-    exec.execSync('npm install @babel/preset-env --save-dev');
-    exec.execSync('npm install @babel/register --save-dev');
-    exec.execSync('npm install nodemon --save-dev');
+    exec.execSync('npm install --save cors express');
+    exec.execSync('npm install --save-dev @babel/core  @babel/preset-env @babel/register nodemon');
     if (config.databases.indexOf('MongoDB') > -1) {
         exec.execSync('npm install mongoose --save');
     }

@@ -8,8 +8,7 @@ const mongoData = fs.readFileSync(require.resolve('../../../templates/js5/databa
 
 export function initDependencies(config: any) {
     process.chdir(config.path);
-    exec.execSync('npm install cors --save');
-    exec.execSync('npm install express --save');
+    exec.execSync('npm install --save cors express');
     exec.execSync('npm install nodemon --save-dev');
     if (config.databases.indexOf('MongoDB') > -1) {
         exec.execSync('npm install mongoose --save');
