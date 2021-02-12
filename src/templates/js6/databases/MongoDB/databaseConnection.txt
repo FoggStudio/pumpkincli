@@ -1,0 +1,13 @@
+
+// ********************************************************
+// Connection to Mongo database
+// ********************************************************
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://root:<%=address%>:27017/<%=databaseName%>?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true});
+
+var db = mongoose.connection; 
+db.on('error', console.error.bind(console, 'Error during connection')); 
+db.once('open', function (){
+    console.log("Connected to database"); 
+}); 

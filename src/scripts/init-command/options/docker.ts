@@ -1,24 +1,41 @@
 import * as exec from 'child_process'
 import * as fs from 'fs'
-import * as dcBuilder from './data/docker/dockerComposeBuilder'
+import {template} from 'lodash'
 
-let dockerFileDataSimpleJS6 = fs.readFileSync(require.resolve('./data/docker/DockerFileSimpleJs6.txt'));
+const dockerFileData = fs.readFileSync(require.resolve('../../../templates/options/docker/dockerFile.txt'));
+const dockerComposeData = fs.readFileSync(require.resolve('../../../templates/options/docker/docker-compose.txt'));
+const mongoData = fs.readFileSync(require.resolve('../../../templates/options/docker/mongodb.txt'));
 
 export function initDocker(config: any) {
     process.chdir(config.path);
     exec.exec('touch DockerFile', (err, stdout, stderr) => {
         if (err) { console.log(err); return; }
     });
-    fs.writeFile('DockerFile', dockerFileDataSimpleJS6 , (err) => { 
-        // In case of a error throw err. 
-        if (err) throw err; 
-    });
+    fs.writeFileSync('Dockerfile', dockerFileData);
+
+    const dockerComposeTemplate = template(dockerComposeData.toString());
+    const params = {
+        name:config.name,
+        databases:'',
+        links:''
+    }
+    if (config.databases.length > 0) {
+        params.links += 'links:\n'
+    }
+    if (config.databases.indexOf('MongoDB') > -1) {
+        params.links+= '      - mongodb';
+        const mongoTemplate = template(mongoData.toString());
+        params.databases += mongoTemplate({
+            databaseName: config.databasesInfos.mongo.databaseName,
+            password: config.databasesInfos.mongo.password
+        })
+    }
+
+    const resolvedDockerComposeTemplate = dockerComposeTemplate(params)
+
     exec.exec('touch docker-compose.yml', (err, stdout, stderr) => {
         if (err) { console.log(err); return; }
     });
-    fs.writeFile('docker-compose.yml', dcBuilder.initDockerCompose(config.name, config.databases) , (err) => { 
-        // In case of a error throw err. 
-        if (err) throw err; 
-    }) 
+    fs.writeFileSync('docker-compose.yml', resolvedDockerComposeTemplate) 
     
 }

@@ -1,68 +1,68 @@
 import * as fs from 'fs'
-import * as yaml from 'js-yaml'
 import * as exec from 'child_process'
-import * as simplearchitecture from './init-command/architecture/simple'
 import * as initJs6app from './init-command/language/js6'
 import * as initDocker from './init-command/options/docker'
-import * as utils from './init-command/utils/dataBaseHelper'
 
-export function build(config: any) {
+export async function build(config: any) {
 
     // ********************************************************
     // Init git and npm
     // ********************************************************
 
-    exec.exec('git init', (err, stdout, stderr) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-    });
+    exec.execSync('git init');
 
-    exec.exec('npm init -y', (err, stdout, stderr) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-    });
+    exec.execSync('npm init -y');
 
-    exec.exec('touch .gitignore', (err, stdout, stderr) => {
-        if (err) { console.log(err); return; }
-    });
-    fs.writeFile('.gitignore', 'node_modules' , (err) => { 
-        // In case of a error throw err. 
-        if (err) throw err; 
-    }) 
+    exec.execSync('touch .gitignore');
+
+    fs.writeFileSync('.gitignore', 'node_modules') 
     
 
     // ********************************************************
     // Install all dependencies 
     // ********************************************************
 
-    if (config.language === "Javascript ECMAScript 6") {
-        initJs6app.initDependencies(config.path);
+    switch (config.language) {
+        case "Javascript ECMAScript 6":
+            await initJs6app.initDependencies(config);
+            await initJs6app.addScripts(config.path);
+            break;
+    
+        default:
+            break;
     }
 
     // ********************************************************
     // Create folders and files
     // ********************************************************
-
-    // Build Architecture
-    if (config.architecture === "Simple") {
-        simplearchitecture.buildArchitecture(config.path);
+   
+    process.chdir(config.path);
+    if (!fs.existsSync('./src')){
+        fs.mkdirSync('./src');
+        fs.mkdirSync('./src/Controllers');
+        fs.mkdirSync('./src/Models');
+        fs.mkdirSync('./src/Public');
+        fs.mkdirSync('./src/Routes');
     }
 
-    // Create app file with the good language
-    if (config.language === "Javascript ECMAScript 6"){
-        initJs6app.writeAppFile(config.path);
+
+
+    // ********************************************************
+    // Build template files depending on language
+    // ********************************************************
+
+    switch (config.language) {
+        case "Javascript ECMAScript 6":
+            initJs6app.writeAppFile(config);
+            break;
+    
+        default:
+            break;
     }
 
-    // Add dataBases connections
-    if (config.databases.length > 0) {
-        config.databases.forEach((element: string) => {
-            utils.addDtabaseConnection(element, config)
-        });
-    }
+    // ********************************************************
+    // Build options files
+    // ********************************************************
 
     // Create dockerFile, docker-compose.yaml and .dockerignore
     if (config.options.indexOf('Docker') > -1) {

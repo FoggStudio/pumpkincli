@@ -1,12 +1,15 @@
 // importations
 import express from 'express';
 import bodyParser from 'body-parser';
-import routes from './API/Routes/apiRoutes';
+import routes from './Routes';
 import cors from 'cors'
+<%=imports%>
 
 // build app
 var app = express();
 var port = process.env.port || 3000;
+
+<%=dataBaseConnection%>
 
 // use body parser
 app.use(bodyParser.urlencoded({extended: true}));
@@ -19,4 +22,4 @@ routes(app);
 // start app
 app.listen(port);
 // eslint-disable-next-line
-console.log("API started on: " + port);
+console.log("<%=name%> started on: " + port);

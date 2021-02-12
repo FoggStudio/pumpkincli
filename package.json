@@ -16,7 +16,8 @@
     "@types/node-fetch": "^2.5.7",
     "inquirer": "^7.2.0",
     "js-yaml": "^3.14.0",
-    "node-fetch": "^2.6.0",
+    "lodash": "^4.17.20",
+    "node-fetch": "^2.6.1",
     "signale": "^1.4.0",
     "tslib": "^1.13.0"
   },
@@ -59,8 +60,8 @@
     ]
   },
   "repository": "FoggStudio/PumpkinCLI",
-  "publishConfig": { 
-    "registry": "https://npm.pkg.github.com/@FoggStudio" 
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@FoggStudio"
   },
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",

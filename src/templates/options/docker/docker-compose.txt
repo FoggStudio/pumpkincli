@@ -1,0 +1,16 @@
+# ============================================
+# PRODUCTION docker-compose configuration file
+# ============================================
+
+version: "3.1"
+
+services:
+
+  <%=databases%>
+  
+  api:
+    build: ./
+    container_name: <%=name%>
+    ports:
+      - 3000:3000
+    <%=links%>
