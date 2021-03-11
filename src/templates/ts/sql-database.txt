@@ -1,0 +1,9 @@
+import { Sequelize } from "sequelize";
+
+export const sqlDatabase = new Sequelize({
+  database: "<%=databaseName%>",
+  username: "<%=username%>",
+  password: "<%=password%>",
+  dialect: "<%=dialect%>",
+  host: '<%=host%>'
+});

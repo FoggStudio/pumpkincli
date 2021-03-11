@@ -3,38 +3,37 @@ import * as inquirer from 'inquirer'
 import fs = require('fs');
 import yaml = require('js-yaml');
 import * as builder from '../scripts/builder'
-
+/**
+ * The init command should be used once by project to build them
+ */
 export default class Init extends Command {
   static description = 'Init a new pumpkin project'
 
+  static args = [{name: 'name'}] // The name of the project
 
-  static args = [{name: 'name'}]
-
+  // The future config file
   static project = {
     configuration : {
       name: '',
       path: '',
       language: null,
-      tests: {
-        isTested : false,
-        testTools: []
-      },
       databases: [],
       databasesInfos: {
         mongo: {},
-        maria: {},
+        mariadb: {},
       },
-      libraries: [],
-      websockets: false,
       options: []
     },
-    exposed: []
+    exposed: {
+      routes: []
+    }
   }
 
   async run() {
 
     const {args} = this.parse(Init)
 
+    //This check for project name 
     try {  
       if(args.name) {
         Init.project.configuration.name = args.name.toLowerCase();
@@ -49,6 +48,7 @@ export default class Init extends Command {
       console.log(" |_|  \\_,_|_|_|_| .__/_\\_\\_|_||_|  \\___|____|___|");
       console.log("                |_|                              ");
 
+      // Ask for project language
       const promptLanguage : any = await inquirer.prompt([
         {
           type: 'list',
@@ -59,16 +59,7 @@ export default class Init extends Command {
       ]);
       Init.project.configuration.language = promptLanguage.language;
 
-      const promptTestsTools : any = await inquirer.prompt([
-        {
-          type: 'list',
-          message: 'Select test tools you wanna use',
-          name: 'testTools',
-          choices: ['Jest']
-        }
-      ]);
-      Init.project.configuration.tests.testTools = promptTestsTools.testTools;
-
+      // Ask for project desired databases
       const promptDataBases : any = await inquirer.prompt([
         {
           type: 'checkbox',
@@ -79,21 +70,7 @@ export default class Init extends Command {
       ]);
       Init.project.configuration.databases = promptDataBases.dataBases;
 
-      const promptlibraries : any = await inquirer.prompt([
-        {
-          type: 'checkbox',
-          message: 'Choose libraries you need',
-          name: 'libraries',
-          choices: ['nodeMailer', 'GraphQL', 'socketIO']
-        }
-      ]);
-      Init.project.configuration.libraries = promptlibraries.libraries;
-
-      if(Init.project.configuration.libraries.find(element => element === 'socketIO')) {
-        Init.project.configuration.websockets = true;
-        
-      }
-
+      // Ask for project options
       const promptOptions : any = await inquirer.prompt([
         {
           type: 'checkbox',
@@ -104,17 +81,18 @@ export default class Init extends Command {
       ]);
       Init.project.configuration.options = promptOptions.options;
 
+      // Ask for mongo database configuration
       if(promptDataBases.dataBases.indexOf('MongoDB') > -1 ) {
         const promptMongoOptions : any = await inquirer.prompt([
           {
             type: 'input',
             message: 'Name of Mongo DB database',
-            name: 'databaseName',
+            name: 'mongoDatabaseName',
           },
           {
             type: 'password',
             message: 'Password of root Mongo DB account',
-            name: 'password',
+            name: 'mongoRootPassword',
           }
         ]);
         let promptMongoAddress : any 
@@ -131,9 +109,55 @@ export default class Init extends Command {
           promptMongoAddress = {address: 'mongodb@mongodb'}
         }
         Init.project.configuration.databasesInfos.mongo = {
-          databaseName: promptMongoOptions.databaseName,
-          password: promptMongoOptions.password,
+          databaseName: promptMongoOptions.mongoDatabaseName,
+          password: promptMongoOptions.mongoRootPassword,
           address: promptMongoAddress.address
+        };
+      }
+
+      // Ask for mariadb database configuration
+      if(promptDataBases.dataBases.indexOf('MariaDB (SQL)') > -1 ) {
+        const promptMariaOptions : any = await inquirer.prompt([
+          {
+            type: 'input',
+            message: 'Name of Maria DB database',
+            name: 'mariaDatabaseName',
+          },
+          {
+            type: 'password',
+            message: 'Password of root Maria DB account',
+            name: 'mariaRootpassword',
+          },
+          {
+            type: 'input',
+            message: 'Name of Maria DB user account',
+            name: 'userAccount',
+          },
+          {
+            type: 'password',
+            message: 'Password of Maria DB account',
+            name: 'userPassword',
+          }
+        ]);
+        let promptMariaAddress : any 
+        if(promptOptions.options.indexOf('Docker') === -1){
+          promptMariaAddress = await inquirer.prompt([
+            {
+              type: 'input',
+              message: 'Address of Maria DB database',
+              name: 'address',
+              default: 'localhost',
+            }
+          ]);
+        } else {
+          promptMariaAddress = {address: 'mariadb@mariadb'}
+        }
+        Init.project.configuration.databasesInfos.mariadb = {
+          databaseName: promptMariaOptions.mariaDatabaseName,
+          rootPassword: promptMariaOptions.mariaRootpassword,
+          userAccount: promptMariaOptions.userAccount,
+          userPassword: promptMariaOptions.userPassword,
+          address: promptMariaAddress.address
         };
       }
     } catch(e) {
@@ -149,9 +173,11 @@ export default class Init extends Command {
       console.error(e);
     }
 
+    // generate config file
     let yamlStr = yaml.safeDump(Init.project.configuration);
     fs.writeFileSync('pumpkin.yaml', yamlStr, 'utf8');
     
+    // Run builder
     await builder.build(Init.project.configuration);
   }
 }

@@ -13,4 +13,8 @@ services:
     container_name: <%=name%>
     ports:
       - 3000:3000
-    <%=links%>
+    networks:
+      - data
+
+networks:
+  data:

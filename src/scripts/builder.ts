@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import * as exec from 'child_process'
 import * as initJs5app from './init-command/language/js5'
 import * as initJs6app from './init-command/language/js6'
+import * as initTsapp from './init-command/language/ts'
 import * as initDocker from './init-command/options/docker'
 
 export async function build(config: any) {
@@ -18,7 +19,6 @@ export async function build(config: any) {
 
     fs.writeFileSync('.gitignore', 'node_modules') 
     
-
     // ********************************************************
     // Install all dependencies 
     // ********************************************************
@@ -32,11 +32,14 @@ export async function build(config: any) {
             await initJs6app.initDependencies(config);
             await initJs6app.addScripts(config.path);
             break;
-    
+        case "TypeScript":
+            await initTsapp.initDependencies(config);
+            await initTsapp.addScripts(config.path);
+            break;
         default:
             break;
     }
-
+    
     // ********************************************************
     // Create folders and files
     // ********************************************************
@@ -63,7 +66,9 @@ export async function build(config: any) {
         case "Javascript ECMAScript 6":
             initJs6app.writeAppFile(config);
             break;
-    
+        case "TypeScript":
+            initTsapp.writeAppFile(config);
+            break;
         default:
             break;
     }

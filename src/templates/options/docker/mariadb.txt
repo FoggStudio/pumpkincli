@@ -1,0 +1,20 @@
+  mariadb:
+    image: mariadb
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: <%=rootPassword%>
+      MYSQL_DATABASE: <%=databaseName%>
+      MYSQL_USER: <%=userAccount%>
+      MYSQL_PASSWORD: <%=userPassword%>
+    networks:
+      - data
+        
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - data
