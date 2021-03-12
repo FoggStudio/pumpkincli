@@ -1,0 +1,40 @@
+{
+    "version": "0.1.0",
+    "commands": {
+        "init": {
+            "id": "init",
+            "description": "Init a new pumpkin project",
+            "pluginName": "pumpkin",
+            "pluginType": "core",
+            "aliases": [],
+            "flags": {},
+            "args": [
+                {
+                    "name": "name"
+                }
+            ]
+        },
+        "add:crud": {
+            "id": "add:crud",
+            "description": "Add models and contoller for CRUD actions",
+            "pluginName": "pumpkin",
+            "pluginType": "core",
+            "aliases": [],
+            "flags": {},
+            "args": [
+                {
+                    "name": "modelName"
+                }
+            ]
+        },
+        "generate:routes": {
+            "id": "generate:routes",
+            "description": "Generate route file",
+            "pluginName": "pumpkin",
+            "pluginType": "core",
+            "aliases": [],
+            "flags": {},
+            "args": []
+        }
+    }
+}

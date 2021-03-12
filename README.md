@@ -28,29 +28,32 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`pumpkin hello [FILE]`](#pumpkin-hello-file)
+* [`pumpkin add:crud [MODELNAME]`](#pumpkin-addcrud-modelname)
+* [`pumpkin generate:routes`](#pumpkin-generateroutes)
 * [`pumpkin help [COMMAND]`](#pumpkin-help-command)
 * [`pumpkin init [NAME]`](#pumpkin-init-name)
 
-## `pumpkin hello [FILE]`
+## `pumpkin add:crud [MODELNAME]`
 
-describe the command here
+Add models and contoller for CRUD actions
 
 ```
 USAGE
-  $ pumpkin hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ pumpkin hello
-  hello world from ./src/hello.ts!
+  $ pumpkin add:crud [MODELNAME]
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/FoggStudio/PumpkinCLI/blob/v0.1.0/src/commands/hello.ts)_
+_See code: [src/commands/add/crud.ts](https://github.com/FoggStudio/PumpkinCLI/blob/v0.1.0/src/commands/add/crud.ts)_
+
+## `pumpkin generate:routes`
+
+Generate route file
+
+```
+USAGE
+  $ pumpkin generate:routes
+```
+
+_See code: [src/commands/generate/routes.ts](https://github.com/FoggStudio/PumpkinCLI/blob/v0.1.0/src/commands/generate/routes.ts)_
 
 ## `pumpkin help [COMMAND]`
 
