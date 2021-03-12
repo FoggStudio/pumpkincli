@@ -1,0 +1,8 @@
+    app
+      .route("/<%=crud%>s")
+      .get(this.<%=crud%>Controller.getAll)
+      .post(this.<%=crud%>Controller.create);
+    app.route("/<%=crud%>s/:id")
+      .get(this.<%=crud%>Controller.get)
+      .post(this.<%=crud%>Controller.update)
+      .delete(this.<%=crud%>Controller.delete);

@@ -1,7 +1,7 @@
 <%=imports%>
 
 export class Routes {
-  public userController: UserController = new UserController();
+  <%=definitions%>
 
   public routes(app): void {
     <%=routes%>
