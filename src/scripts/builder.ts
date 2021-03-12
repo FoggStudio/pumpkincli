@@ -4,25 +4,27 @@ import * as initJs5app from './init-command/language/js5'
 import * as initJs6app from './init-command/language/js6'
 import * as initTsapp from './init-command/language/ts'
 import * as initDocker from './init-command/options/docker'
+import cli from 'cli-ux'
 
 export async function build(config: any) {
 
     // ********************************************************
     // Init git and npm
     // ********************************************************
-
+    cli.action.start('Initialize git repository');
     exec.execSync('git init');
-
-    exec.execSync('npm init -y');
-
     exec.execSync('touch .gitignore');
-
     fs.writeFileSync('.gitignore', 'node_modules') 
-    
+    cli.action.stop();
+
+    cli.action.start('Initialize npm');
+    exec.execSync('npm init -y');
+    cli.action.stop();
+
     // ********************************************************
     // Install all dependencies 
     // ********************************************************
-
+    cli.action.start('Installing depedencies and adding npm scripts');
     switch (config.language) {
         case "Javascript ECMAScript 5":
             await initJs5app.initDependencies(config);
@@ -39,6 +41,7 @@ export async function build(config: any) {
         default:
             break;
     }
+    cli.action.stop();
     
     // ********************************************************
     // Create folders and files
