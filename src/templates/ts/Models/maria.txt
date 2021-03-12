@@ -1,0 +1,45 @@
+import { Model, DataTypes } from "sequelize";
+import { sqlDatabase } from "../sql-database";
+
+export interface <%=modelName%>Interface {
+    /*
+    * Add here your exposed model properties
+    * exemple:
+    * name: string;
+    */
+  }
+
+export class <%=modelName%> extends Model {
+  public id!: number;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+  /*
+  * Add here your model properties
+  * exemple:
+  * public name!: string;
+  */
+}
+
+<%=modelName%>.init(
+    {
+      id: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      /*
+      * Add here your properties SQL typing declaration
+      * exemple:
+      * name: {
+      *     type: new DataTypes.STRING(128),
+      *     allowNull: false,
+      * },
+      */
+    },
+    {
+      tableName: "<%=modelName%>s",
+      sequelize: database,
+    }
+  );
+  
+<%=modelName%>.sync().then(() => console.log("<%=modelName%> table created"));

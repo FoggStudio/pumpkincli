@@ -1,0 +1,45 @@
+import { <%=modelName%>, <%=modelName%>Interface } from "../Models/<%=modelName%>.model";
+import { Request, Response } from "express";
+
+export class <%=modelName%>Controller {
+  public create(req: Request, res: Response) {
+    const params: <%=modelName%>Interface = req.body;
+    <%=modelName%>.create<<%=modelName%>>(params)
+      .then((<%=modelName%>: <%=modelName%>) => res.status(201).json(<%=modelName%>))
+      .catch((err: Error) => res.status(500).json(err));
+  }
+
+  public get(req: Request, res: Response) {
+    const params: <%=modelName%>Interface = req.body;
+    <%=modelName%>.findOne<<%=modelName%>>({where:{id:req.params.id}})
+      .then((<%=modelName%>: <%=modelName%>) => res.status(201).json(<%=modelName%>))
+      .catch((err: Error) => res.status(500).json(err));
+  }
+
+  public getAll(req: Request, res: Response) {
+    const params: <%=modelName%>Interface = req.body;
+    <%=modelName%>.findAll<<%=modelName%>>()
+      .then((<%=modelName%>s: <%=modelName%>[]) => res.status(201).json(<%=modelName%>s))
+      .catch((err: Error) => res.status(500).json(err));
+  }
+
+  public update(req: Request, res: Response) {
+    const params: <%=modelName%>Interface = req.body;
+    <%=modelName%>.update<<%=modelName%>>({...params}, {where:{id:req.params.id}})
+      .then(() => res.status(201).json(<%=modelName%>))
+      .catch((err: Error) => res.status(500).json(err));
+  }
+
+  public delete(req: Request, res: Response) {
+    const params: <%=modelName%>Interface = req.body;
+    <%=modelName%>.destroy<<%=modelName%>>(
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    )
+      .then(() => res.status(201).json(req.body.id))
+      .catch((err: Error) => res.status(500).json(err));
+  }
+}
