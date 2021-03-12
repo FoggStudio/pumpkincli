@@ -9,8 +9,8 @@ export function writeAppFile(config: any, dataBase: String, modelName: String) {
 
     process.chdir(config.configuration.path + '/src');
 
-    if (dataBase == 'MariaDB (SQL)') {
-        process.chdir(config.configuration.path + '/src/Controllers');
+      if (dataBase == 'MariaDB (SQL)') {
+                process.chdir(config.configuration.path + '/src/Controllers');
         exec.exec(`touch ${modelName}.controller.ts`, (err, stdout, stderr) => {
             if (err) { console.log(err); return; }
         });
