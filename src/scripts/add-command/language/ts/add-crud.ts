@@ -5,7 +5,7 @@ import {template} from 'lodash'
 const mariaDbControllerData = fs.readFileSync(require.resolve('../../../../templates/ts/Controllers/maria.txt'));
 const mariaDbModelData = fs.readFileSync(require.resolve('../../../../templates/ts/Models/maria.txt'));
 
-export function writeAppFile(config: any, dataBase: String, modelName: String) {
+export function writeAppFile(config: any, dataBase: string, modelName: string) {
 
     process.chdir(config.configuration.path + '/src');
 
@@ -24,7 +24,7 @@ export function writeAppFile(config: any, dataBase: String, modelName: String) {
     }
 }
 
-function getCompiledMariaControllerTemplate(modelName: String) {
+function getCompiledMariaControllerTemplate(modelName: string) {
     const controllerTemplate = template(mariaDbControllerData.toString());
 
     const params = {
@@ -34,7 +34,7 @@ function getCompiledMariaControllerTemplate(modelName: String) {
     return controllerTemplate(params);
 }
 
-function getCompiledMariaModelTemplate(modelName: String) {
+function getCompiledMariaModelTemplate(modelName: string) {
     const modelTemplate = template(mariaDbModelData.toString());
 
     const params = {

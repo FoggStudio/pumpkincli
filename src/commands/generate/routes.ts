@@ -41,7 +41,7 @@ export default class GenerateRoutes extends Command {
     }
   }
 
-  getRoutesTemplate(imports: String, definitions: String, routes: String) {
+  getRoutesTemplate(imports: string, definitions: string, routes: string) {
     const route = template(routesTemplate.toString());
 
     const params = {
@@ -53,7 +53,7 @@ export default class GenerateRoutes extends Command {
     return route(params);
   }
 
-  getCRUDTemplate(name: String) {
+  getCRUDTemplate(name: string) {
     const crud = template(crudRoutesTemplate.toString());
     return crud({name})
   }

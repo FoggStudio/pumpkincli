@@ -18,7 +18,7 @@ export function initDependencies(config: any) {
 
 export function addScripts(path: string) {
     process.chdir(path);
-    let packaged = JSON.parse(fs.readFileSync('./package.json').toString())
+    const packaged = JSON.parse(fs.readFileSync('./package.json').toString())
     packaged.scripts['start'] = 'node ./src/start.js';
     fs.writeFileSync('./package.json', JSON.stringify(packaged, null, 4));
 }

@@ -37,7 +37,7 @@ export default class AddCRUD extends Command {
           config.exposed.routes.push(args.modelName);
           writeAppFile(config, crudDatabase.database, args.modelName);
           process.chdir(config.configuration.path + '/src');
-          let yamlStr = yaml.safeDump(config);
+          const yamlStr = yaml.safeDump(config);
           fs.writeFileSync('pumpkin.yaml', yamlStr, 'utf8');
         } else {
           console.warn('Cannot found pumplin file');

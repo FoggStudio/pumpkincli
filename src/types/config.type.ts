@@ -1,31 +1,31 @@
 
 export interface config {
     configuration : {
-      name: String,
-      path: String,
-      language: String,
-      databases: String[],
+      name: string,
+      path: string,
+      language: string,
+      databases: string[],
       databasesInfos: {
         mongo: mongo | {},
         mariadb: mariadb | {},
       },
-      options: String[]
+      options: string[]
     },
     exposed: {
-      routes: String[]
+      routes: string[]
     }
   }
 
 interface mongo {
-    databaseName: String,
-    rootPassword: String,
-    address: String
+    databaseName: string,
+    rootPassword: string,
+    address: string
 }
 
 interface mariadb {
-    databaseName: String,
-    rootPassword: String,
-    userAccount: String,
-    userPassword: String,
-    address: String
+    databaseName: string,
+    rootPassword: string,
+    userAccount: string,
+    userPassword: string,
+    address: string
 }

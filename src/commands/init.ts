@@ -174,7 +174,7 @@ export default class Init extends Command {
     }
 
     // generate config file
-    let yamlStr = yaml.safeDump(Init.project);
+    const yamlStr = yaml.safeDump(Init.project);
     fs.writeFileSync('pumpkin.yaml', yamlStr, 'utf8');
     
     // Run builder

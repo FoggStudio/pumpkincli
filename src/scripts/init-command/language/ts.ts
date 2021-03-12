@@ -25,7 +25,7 @@ export function initDependencies(config: any) {
 
 export function addScripts(path: string) {
     process.chdir(path);
-    let packaged = JSON.parse(fs.readFileSync('./package.json').toString())
+    const packaged = JSON.parse(fs.readFileSync('./package.json').toString())
     packaged.scripts['build'] = 'tsc';
     packaged.scripts['start'] = 'ts-node ./src/start.ts';
     packaged.scripts['start:prod'] = 'nodemon ./dist/server.js';
