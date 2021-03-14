@@ -15,11 +15,11 @@ A fully configurable CLI for express projects
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g pumpkin
+$ npm install -g @FoggStudio/pumpkincli
 $ pumpkin COMMAND
 running command...
 $ pumpkin (-v|--version|version)
-pumpkin/0.1.0 linux-x64 node-v10.2.0
+@FoggStudio/pumpkincli/0.1.0 linux-x64 node-v10.2.0
 $ pumpkin --help [COMMAND]
 USAGE
   $ pumpkin COMMAND
@@ -42,7 +42,7 @@ USAGE
   $ pumpkin add:crud [MODELNAME]
 ```
 
-_See code: [src/commands/add/crud.ts](https://github.com/FoggStudio/PumpkinCLI/blob/v0.1.0/src/commands/add/crud.ts)_
+_See code: [src/commands/add/crud.ts](https://github.com/FoggStudio/pumpkincli/blob/v0.1.0/src/commands/add/crud.ts)_
 
 ## `pumpkin generate:routes`
 
@@ -53,7 +53,7 @@ USAGE
   $ pumpkin generate:routes
 ```
 
-_See code: [src/commands/generate/routes.ts](https://github.com/FoggStudio/PumpkinCLI/blob/v0.1.0/src/commands/generate/routes.ts)_
+_See code: [src/commands/generate/routes.ts](https://github.com/FoggStudio/pumpkincli/blob/v0.1.0/src/commands/generate/routes.ts)_
 
 ## `pumpkin help [COMMAND]`
 
@@ -81,5 +81,5 @@ USAGE
   $ pumpkin init [NAME]
 ```
 
-_See code: [src/commands/init.ts](https://github.com/FoggStudio/PumpkinCLI/blob/v0.1.0/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/FoggStudio/pumpkincli/blob/v0.1.0/src/commands/init.ts)_
 <!-- commandsstop -->
