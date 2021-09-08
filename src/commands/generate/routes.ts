@@ -27,6 +27,7 @@ export default class GenerateRoutes extends Command {
             config.exposed.routes.forEach(crud => {
                 imports += `import { ${crud}Controller } from "../Controllers";\n`
                 definitions += `public ${crud.toLowerCase()}Controller: ${crud}Controller = new ${crud}Controller();\n`
+                console.log(crud)
                 routes += this.getCRUDTemplate(crud);
             });
             process.chdir(config.configuration.path + '/src/Routes');
@@ -55,6 +56,8 @@ export default class GenerateRoutes extends Command {
 
   getCRUDTemplate(name: String) {
     const crud = template(crudRoutesTemplate.toString());
+    console.log(crud);
+    console.log(crud({name}))
     return crud({name})
   }
 }

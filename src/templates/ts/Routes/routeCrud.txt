@@ -1,8 +1,8 @@
     app
-      .route("/<%=crud%>s")
-      .get(this.<%=crud%>Controller.getAll)
-      .post(this.<%=crud%>Controller.create);
-    app.route("/<%=crud%>s/:id")
-      .get(this.<%=crud%>Controller.get)
-      .post(this.<%=crud%>Controller.update)
-      .delete(this.<%=crud%>Controller.delete);
+      .route("/<%=name%>s")
+      .get(this.<%=name%>Controller.getAll)
+      .post(this.<%=name%>Controller.create);
+    app.route("/<%=name%>s/:id")
+      .get(this.<%=name%>Controller.get)
+      .post(this.<%=name%>Controller.update)
+      .delete(this.<%=name%>Controller.delete);
